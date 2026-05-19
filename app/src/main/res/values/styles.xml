@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Selune" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:statusBarColor">#1b2540</item>
+        <item name="android:navigationBarColor">#1b2540</item>
+        <item name="android:windowFullscreen">false</item>
+    </style>
+</resources>
