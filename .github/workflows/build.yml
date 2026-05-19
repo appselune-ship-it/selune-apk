@@ -19,12 +19,19 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Crear gradle.properties
+        run: |
+          cat > gradle.properties << 'EOF'
+          android.useAndroidX=true
+          android.enableJetifier=true
+          org.gradle.jvmargs=-Xmx2048m
+          EOF
+
       - name: Generar Gradle Wrapper
         run: |
           wget -q https://services.gradle.org/distributions/gradle-8.4-bin.zip -O /tmp/gradle.zip
           unzip -q /tmp/gradle.zip -d /tmp/
           /tmp/gradle-8.4/bin/gradle wrapper --gradle-version 8.4 --project-dir .
-          echo "Tamaño JAR: $(wc -c < gradle/wrapper/gradle-wrapper.jar) bytes"
 
       - name: Compilar APK
         run: |
