@@ -19,12 +19,12 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Descargar Gradle Wrapper JAR
+      - name: Generar Gradle Wrapper
         run: |
-          mkdir -p gradle/wrapper
-          curl -L "https://repo1.maven.org/maven2/org/gradle/gradle-wrapper/8.4/gradle-wrapper-8.4.jar" \
-            -o gradle/wrapper/gradle-wrapper.jar
-          ls -lh gradle/wrapper/
+          wget -q https://services.gradle.org/distributions/gradle-8.4-bin.zip -O /tmp/gradle.zip
+          unzip -q /tmp/gradle.zip -d /tmp/
+          /tmp/gradle-8.4/bin/gradle wrapper --gradle-version 8.4 --project-dir .
+          echo "Tamaño JAR: $(wc -c < gradle/wrapper/gradle-wrapper.jar) bytes"
 
       - name: Compilar APK
         run: |
@@ -37,5 +37,3 @@ jobs:
           name: Selune-APK
           path: app/build/outputs/apk/release/app-release-unsigned.apk
           retention-days: 30
-
-          
